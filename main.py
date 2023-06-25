@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import logging
 import requests
 
+logging.basicConfig(level=logging.INFO)
+
 
 class RatCatcher:
 
@@ -62,6 +64,8 @@ class RatCatcher:
         if name not in self.stats:
             self.stats[name] = {}
         self.stats[name][result] += 1
+        if self.verbose > 0:
+            logging.info(self.stats)
 
     def start(self):
         """Run the rat recognition engine."""
@@ -86,7 +90,5 @@ class RatCatcher:
 
 if __name__ == '__main__':
     import time
-    rt = RatCatcher('player')
-    rt.get_ladder_status()
-    time.sleep(5)
-    rt.get_ladder_status()
+    rt = RatCatcher('dualipa w dababy', verbose=1)
+    rt.start()
